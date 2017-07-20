@@ -3,7 +3,7 @@ import urllib
 import csv
 import re
 from datetime import datetime, timedelta
-import time
+import time, os, zipfile
 
 def getNewsContent(htmlstring):
     revision_date = ""
@@ -113,3 +113,5 @@ def getCsvFileByDate(date):
 dates = []
 for date in dates:
      getCsvFileByDate(date)
+     print 'date '+date+' is finished.'
+     zipfile.ZipFile('compressed_reuters_news_'+date+'.zip','w').write(date+'.json', compress_type=zipfile.ZIP_DEFLATED)
